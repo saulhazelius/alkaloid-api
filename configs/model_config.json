@@ -1,0 +1,12 @@
+{
+  "model": "XGBClassifier",
+  "params": {
+  "eta": 0.43911010940117146,
+  "max_depth": 15,
+  "min_child_weight": 2,
+  "n_estimators": 120,
+  "reg_alpha": 0.0747528345435633,
+  "reg_lambda": 5.147611893010373,
+  "seed": 0
+  }
+}

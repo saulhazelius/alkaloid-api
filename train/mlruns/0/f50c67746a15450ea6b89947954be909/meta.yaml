@@ -1,0 +1,15 @@
+artifact_uri: file:///home/saul/alkaloid-api/train/mlruns/0/f50c67746a15450ea6b89947954be909/artifacts
+end_time: 1664600113947
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+name: ''
+run_id: f50c67746a15450ea6b89947954be909
+run_uuid: f50c67746a15450ea6b89947954be909
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1664600093250
+status: 3
+tags: []
+user_id: saul
