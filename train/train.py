@@ -2,7 +2,6 @@ import json
 import logging
 from data.preprocessing import processed_data
 from xgboost import XGBClassifier
-from sklearn.model_selection import cross_val_score
 import mlflow
 from mlflow.xgboost import autolog 
 
@@ -11,6 +10,7 @@ logger = logging.getLogger()
 logger.setLevel(logging.INFO)
 
 MODEL_CONFIG_PATH = "../configs/model_config.json"
+
 
 def load_model_definition(model_path):
     
@@ -39,6 +39,7 @@ def train(model_definition, X, y):
 
     else:
         logger.warning("Please verify model name and definition")
+
 
 if __name__ == '__main__':
     
