@@ -28,8 +28,8 @@ def train(model_definition, X, y):
 
     if model_name == "XGBClassifier":
         
-        logging.info(f"Loaded model: {model_name}")
-        logging.info(f"Number of samples for training: {n_samples}")
+        logger.info(f"Loaded model: {model_name}")
+        logger.info(f"Number of samples for training: {n_samples}")
 
         autolog()
         with mlflow.start_run():
@@ -38,7 +38,7 @@ def train(model_definition, X, y):
             model.fit(X, y)
 
     else:
-        logging.debug("Please verify model name and definition")
+        logger.warning("Please verify model name and definition")
 
 if __name__ == '__main__':
     
