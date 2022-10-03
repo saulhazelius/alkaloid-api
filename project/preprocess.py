@@ -34,11 +34,17 @@ def create_input(json_file, max_len):
             )
 
     inpt = np.array(sorted([val for val in json_dict.values()]))
-    inp_padded = np.pad(
-        inpt, (0, max_len - len(inpt)), constant_values="-999.0"
-    )
+    if max_len - len(inpt) >= 0:
 
-    return inp_padded
+        inp_padded = np.pad(
+            inpt, (0, max_len - len(inpt)), constant_values="-999.0"
+        )
+
+        return inp_padded.reshape(1, -1)
+
+    else:
+
+        return inpt.reshape(1, -1)
 
 
 PREDICT_CONFIG_PATH = "../configs/predict_config.json"
