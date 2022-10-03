@@ -2,6 +2,7 @@ import json
 import numpy as np
 import logging
 
+
 def get_max_len(max_len_path):
     """Max length for array padding in create_input function"""
     with open(max_len_path) as w:
@@ -33,7 +34,9 @@ def create_input(json_file, max_len):
             )
 
     inpt = np.array(sorted([val for val in json_dict.values()]))
-    inp_padded = np.pad(inpt, (0, max_len), constant_values='-999.0')
+    inp_padded = np.pad(
+        inpt, (0, max_len - len(inpt)), constant_values="-999.0"
+    )
 
     return inp_padded
 
@@ -42,4 +45,3 @@ PREDICT_CONFIG_PATH = "../configs/predict_config.json"
 max_len = get_max_len(PREDICT_CONFIG_PATH)
 json_file = "spectra.json"
 created_input = create_input(json_file, max_len)
-
