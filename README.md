@@ -74,7 +74,7 @@ for the resampling strategies 1, and 2, respectively. Thus, the selected model w
 |f1-score|0.26|
 |roc auc|0.65|
 
-Given the metrics results, one be cautious about the practical usage of this model to predict alkaloids.
+Given the metrics results, one must be cautious about the practical usage of this model to predict alkaloids.
 
 ### 5. Prediction
 
