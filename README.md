@@ -81,18 +81,23 @@ Given the metrics results, one be cautious about the practical usage of this mod
 You can use this repo for your own predicitions using 13C NMR data. 
 
 ### 5.1 Locally from cloned repo
+(Requires Python >= 3.8)
 
-First, clone the repo via 
+First, clone the repo via
 
 `git clone https://github.com/saulhazelius/alkaloid-api`
 
-or download the zip from the github site.
+or download and unzip the zip file from the github site.
 
-Then, within the `project` dir, modify the `spectra.json` file with your own NMR input values.
+Then, within the `project` dir install the dependencies:
+
+`pip install -r requirements_predict.txt`
+
+In order to make predictions, modify the `spectra.json` file with your own NMR input values.
 Finally, run:
 
-`python predict.py` 
+`python predict.py`
 
-to perform the prediction.
+to perform the alkaloid prediction.
 
 
