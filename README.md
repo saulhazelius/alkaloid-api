@@ -10,12 +10,12 @@ The data originally comes from the [Naproc-13 Dataset](https://pubs.acs.org/doi/
 
 ### 2. Data preprocessing
 
-For the exeperiments, two resampling techniques were tested for alliviating the data imbalance (0.8 % positives):
+For the experiments, two resampling techniques were tested for alliviating the data imbalance (0.8 % positives):
 
 1. Random undersampling
 2. Combination of random undersampling and oversampling 
 
-The selected new imbalance ratio was 10% of positives. 
+The selected new imbalance ratio was 10% of positives. The imblearn implementation of the SMOTEENN algorithm was used for the resampling process.
 
 ### 3. Hyperparameters Search
 
@@ -29,7 +29,7 @@ Selected hyperparameters for obtaining the best model:
   * random seed
   * eta
 
-The search was performed using Bayes Optimization minimizing the -recall score (`experiments/hyperparam_search.ipynb`)
+The search was performed using Bayes Optimization minimizing the -recall score (`experiments/hyperparam_search.ipynb`). The hyperopt package was employed for the algorithm search implementation. 
 
 Best hyperparmeters:
 
@@ -43,6 +43,19 @@ Best hyperparmeters:
 |'reg_lambda'| 5.147611893010373|
 |'seed'| 0 |
 
+For training reproduction install the requirements in the root dir:
+
+`pip install -r requirements.txt`
+
+then in the `train` dir run: 
+
+`python train.py`
+
+and see the artifacts information from the MLflow UI:
+
+`mlflow ui` 
+
+and open the browser at the localhost http://127.0.0.1:5000.
 
 ### 4. Evaluation Metrics
 
