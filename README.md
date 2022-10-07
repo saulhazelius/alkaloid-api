@@ -113,4 +113,16 @@ Finally, run:
 
 to perform the alkaloid prediction.
 
+### 5.2 Locally with aws sam invoke function
+(Requires Docker and AWS SAM CLI)
+
+You can use `sam build` to build the Docker image. Inside the dir `api` you can find the `template.yml` and the `Dockerfile` for building and the `app.py` and `events/event.json` for making predictions. Also the trained model `model.xgb` is contained. Thus, in the dir `api` execute:
+
+`sam build` 
+
+Then, modify the `events/event.json` with your NMR info and test the prediction with:
+
+`sam local invoke InferenceFunction --event events/event.json`
+
+
 
