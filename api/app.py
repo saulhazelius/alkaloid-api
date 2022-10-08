@@ -26,9 +26,10 @@ def create_input(event, max_len):
     then checks for valid input values and convert them to a np.array from the
     loaded dictionary. The resultant array is padded to the max_len of spectra
     for alkaloids"""
-    json_dict = event
 
-    values_type = set([type(val) for val in json_dict.values()])
+    spectra = event
+
+    values_type = set([type(val) for val in spectra.values()])
     for value_type in values_type:
 
         if value_type != int and value_type != float:
@@ -36,7 +37,7 @@ def create_input(event, max_len):
                 f"Please set JSON input values to float or int types. Type found: {value_type}"
             )
 
-    inpt = np.array(sorted([val for val in json_dict.values()]))
+    inpt = np.array(sorted([val for val in spectra.values()]))
     if max_len - len(inpt) >= 0:
 
         inp_padded = np.pad(
@@ -71,8 +72,10 @@ def prediction(model_path, inpt, max_len):
 
 
 def lambda_handler(event, context):
-    max_len = get_max_len(PREDICT_CONFIG_PATH)   
-    created_input = create_input(event['body'], max_len)
+    max_len = get_max_len(PREDICT_CONFIG_PATH)
+    
+    nmr = json.loads(event['body']) # dict from JSON 
+    created_input = create_input(nmr, max_len)
 
     model_path = MODEL_PATH
     predicted_value = int(prediction(model_path, created_input, max_len)[0])
@@ -86,4 +89,3 @@ def lambda_handler(event, context):
             }
         )
     }
-

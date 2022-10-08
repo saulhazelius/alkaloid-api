@@ -120,9 +120,17 @@ You can use `sam build` to build the Docker image. Inside the dir `api` you can 
 
 `sam build` 
 
-Then, modify the `events/event.json` with your NMR info and test the prediction with:
+Then, modify the `events/event.json` with your NMR info following the established format and test the prediction with:
 
-`sam local invoke InferenceFunction --event events/event.json`
+`sam local invoke InferenceFunction --event events/event.json`.
 
+### 5.3 Local API
 
+Before deploying to AWS ECR and invoking the Lambda InferenceFunction using an endpoint, test locally the api with a simulation of the API Gateway:
+
+`sam local start-api`
+
+and sent a request with your own NMR data directly. The local api uses the port 3000 in the localhost and the NMR values can be written as: {"NMR1": 100.0, "NMR2": 50.0}. In this case the command would be   
+
+`curl -X http://127.0.0.1:3000/classification -d '{"NMR1": 100.0, "NMR2": 50.0}'`.
 
