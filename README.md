@@ -114,7 +114,7 @@ Finally, run:
 to perform the alkaloid prediction.
 
 ### 5.2 Locally with aws sam invoke function
-(Requires Docker and AWS SAM CLI)
+(5.2 and 5.3 Requires Docker and AWS SAM CLI)
 
 You can use `sam build` to build the Docker image. Inside the dir `api` you can find the `template.yml` and the `Dockerfile` for building and the `app.py` and `events/event.json` for making predictions. Also the trained model `model.xgb` is contained. Thus, in the dir `api` execute:
 
@@ -130,7 +130,10 @@ Before deploying to AWS ECR and invoking the Lambda InferenceFunction using an e
 
 `sam local start-api`
 
-and sent a request with your own NMR data directly. The local api uses the port 3000 in the localhost and the NMR values can be written as: {"NMR1": 100.0, "NMR2": 50.0}. In this case the command would be   
+and sent a request with your own NMR data directly. The local api uses the port 3000 in the localhost and the NMR values can be written as: `{"NMR1": 100.0, "NMR2": 50.0}`. In this case the command would be   
 
-`curl -X http://127.0.0.1:3000/classification -d '{"NMR1": 100.0, "NMR2": 50.0}'`.
+`curl -X http://127.0.0.1:3000/classification -d '{"NMR1": 100.0, "NMR2": 50.0}'`
 
+then you should see the response:
+
+`{"predicted_label": 0, "alkaloid_presence": false}`
