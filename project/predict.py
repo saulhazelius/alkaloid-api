@@ -1,3 +1,6 @@
+"""
+Script for local alkaloid prediction.
+"""
 import logging
 import numpy as np
 from xgboost import XGBClassifier
