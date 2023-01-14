@@ -1,3 +1,6 @@
+"""
+Performs XGB training and logs model with MLFlow. 
+"""
 import json
 import logging
 from data.preprocessing import processed_data
@@ -13,6 +16,7 @@ MODEL_CONFIG_PATH = "../configs/model_config.json"
 
 
 def load_model_definition(model_path):
+    """Reads XGB hyperparameters info."""
     
     with open(model_path) as w:
         model_def = json.load(w)
@@ -21,6 +25,9 @@ def load_model_definition(model_path):
 
 
 def train(model_definition, X, y):
+    """Trains and logs the XGB model using the 
+       hyperparameters from the model definition
+       and the processed data."""
 
     model_name = model_definition["model"]
     params = model_definition["params"]

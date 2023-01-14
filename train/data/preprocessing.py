@@ -1,12 +1,16 @@
+"""
+Reads data from alkaloids and performs over- and under-sampling.
+"""
 import numpy as np
 from imblearn.combine import SMOTEENN
 import os
 
+
 def read_data():
     """Returns a np array from file. Each row from the original file 
        is padded with -999.0 in order to have the same length as the 
-       row with the maximun number of NMR"""
-
+       row with the maximun number of NMR.
+    """
     PATH_FILE = os.getcwd() + '/data/alkaloids.csv'
     file = open(PATH_FILE)
     X = []
@@ -24,7 +28,9 @@ def read_data():
 
 
 def resample(X, y):
-
+    """Performs resampling with the SMOTEENN method using
+       a min/Maj ratio of 0.1.
+    """
     resampler = SMOTEENN(sampling_strategy=0.1, random_state=0)
     X_res, y_res = resampler.fit_resample(X, y)
 
