@@ -3,16 +3,13 @@ Reads data from alkaloids and performs over- and under-sampling.
 """
 import numpy as np
 from imblearn.combine import SMOTEENN
-import os
 
 
-def read_data():
-    """Returns a np array from file. Each row from the original file 
-       is padded with -999.0 in order to have the same length as the 
+def read_data(file):
+    """Returns a np array from file. Each row from the original file
+       is padded with -999.0 in order to have the same length as the
        row with the maximun number of NMR.
     """
-    PATH_FILE = os.getcwd() + '/data/alkaloids.csv'
-    file = open(PATH_FILE)
     X = []
     y = []
 
@@ -24,7 +21,7 @@ def read_data():
     X = np.array(X, dtype=object)
     y = np.array(y)
 
-    return (X, y)
+    return X, y
 
 
 def resample(X, y):
@@ -35,7 +32,3 @@ def resample(X, y):
     X_res, y_res = resampler.fit_resample(X, y)
 
     return X_res, y_res
-
-
-X, y = read_data()
-processed_data = resample(X, y)

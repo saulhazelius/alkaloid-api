@@ -3,7 +3,7 @@ Performs XGB training and logs model with MLFlow.
 """
 import json
 import logging
-from data.preprocessing import processed_data
+from data.preprocessing import read_data, resample
 from xgboost import XGBClassifier
 import mlflow
 from mlflow.xgboost import autolog 
@@ -13,11 +13,19 @@ logger = logging.getLogger()
 logger.setLevel(logging.INFO)
 
 MODEL_CONFIG_PATH = "../configs/model_config.json"
+FILE_PATH = "./data/alkaloids.csv"
+
+
+def open_file(path):
+    """Returns the open data file from path.
+    """
+    f = open(path)
+
+    return f
 
 
 def load_model_definition(model_path):
     """Reads XGB hyperparameters info."""
-    
     with open(model_path) as w:
         model_def = json.load(w)
 
@@ -49,7 +57,9 @@ def train(model_definition, X, y):
 
 
 if __name__ == '__main__':
-    
+
+    data_file = open_file(FILE_PATH)
     model = load_model_definition(MODEL_CONFIG_PATH)
-    X, y = processed_data
-    train(model, X, y)
+    X, y = read_data(data_file)
+    X_res, y_res = resample(X, y)
+    train(model, X_res, y_res)
