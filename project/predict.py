@@ -10,12 +10,6 @@ logging.basicConfig()
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
 
-MODEL_PATH = "../models/model.xgb"
-PREDICT_CONFIG_PATH = "../configs/predict_config.json"
-max_len = get_max_len(PREDICT_CONFIG_PATH)
-json_file = "spectra.json"
-created_input = create_input(json_file, max_len)
-
 
 def prediction(model_path, inpt, max_len):
     """Predicts alkaloid or non-alkaloid existence for input arrays.
@@ -39,6 +33,11 @@ def prediction(model_path, inpt, max_len):
 
 
 if __name__ == "__main__":
+    MODEL_PATH = "../models/model.xgb"
+    PREDICT_CONFIG_PATH = "../configs/predict_config.json"
+    max_len = get_max_len(PREDICT_CONFIG_PATH)
+    json_file = "spectra.json"
+    created_input = create_input(json_file, max_len)
 
     logger.info(f"Array of spectra: {created_input}")
 

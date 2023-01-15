@@ -12,9 +12,6 @@ logging.basicConfig()
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
 
-MODEL_CONFIG_PATH = "../configs/model_config.json"
-FILE_PATH = "./data/alkaloids.csv"
-
 
 def open_file(path):
     """Returns the open data file from path.
@@ -57,6 +54,8 @@ def train(model_definition, X, y):
 
 
 if __name__ == '__main__':
+    MODEL_CONFIG_PATH = "../configs/model_config.json"
+    FILE_PATH = "./data/alkaloids.csv"
 
     data_file = open_file(FILE_PATH)
     model = load_model_definition(MODEL_CONFIG_PATH)
