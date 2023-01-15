@@ -1,7 +1,6 @@
 """
 Preprocessing functions for prediction.
 """
-
 import json
 import numpy as np
 import logging
@@ -51,8 +50,3 @@ def create_input(json_file, max_len):
 
         return inpt.reshape(1, -1)
 
-
-PREDICT_CONFIG_PATH = "../configs/predict_config.json"
-max_len = get_max_len(PREDICT_CONFIG_PATH)
-json_file = "spectra.json"
-created_input = create_input(json_file, max_len)
