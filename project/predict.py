@@ -4,13 +4,11 @@ Script for local alkaloid prediction.
 import logging
 import numpy as np
 from xgboost import XGBClassifier
-from preprocess import created_input, max_len
+from preprocess import create_input, get_max_len
 
 logging.basicConfig()
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
-
-MODEL_PATH = "../models/model.xgb"
 
 
 def prediction(model_path, inpt, max_len):
@@ -35,15 +33,17 @@ def prediction(model_path, inpt, max_len):
 
 
 if __name__ == "__main__":
+    MODEL_PATH = "../models/model.xgb"
+    PREDICT_CONFIG_PATH = "../configs/predict_config.json"
+    max_len = get_max_len(PREDICT_CONFIG_PATH)
+    json_file = "spectra.json"
+    created_input = create_input(json_file, max_len)
 
-    max_len = max_len
-    inpt = created_input
-
-    logger.info(f"Array of spectra: {inpt}")
+    logger.info(f"Array of spectra: {created_input}")
 
     model_path = MODEL_PATH
 
-    predicted_value = prediction(model_path, inpt, max_len)
+    predicted_value = prediction(model_path, created_input, max_len)
     logger.info(
         f"Alkaloid prediction: {True if predicted_value == 1 else False}"
     )

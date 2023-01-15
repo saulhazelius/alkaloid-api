@@ -1,7 +1,6 @@
 """
 Preprocessing functions for prediction.
 """
-
 import json
 import numpy as np
 import logging
@@ -28,13 +27,13 @@ def create_input(json_file, max_len):
             json_dict = json.load(nmr)
 
     except ValueError as e:
-        logging.warning(f"Invalid JSON: {e}")
+        logging.error(f"Invalid JSON: {e}")
 
     values_type = set([type(val) for val in json_dict.values()])
     for value_type in values_type:
 
         if value_type != int and value_type != float:
-            logging.warning(
+            raise TypeError(
                 f"Please set JSON input values to float or int types. Type found: {value_type}"
             )
 
@@ -51,8 +50,3 @@ def create_input(json_file, max_len):
 
         return inpt.reshape(1, -1)
 
-
-PREDICT_CONFIG_PATH = "../configs/predict_config.json"
-max_len = get_max_len(PREDICT_CONFIG_PATH)
-json_file = "spectra.json"
-created_input = create_input(json_file, max_len)
