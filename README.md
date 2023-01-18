@@ -132,7 +132,7 @@ Before deploying to AWS ECR and invoking the Lambda InferenceFunction using an e
 
 and sent a request with your own NMR data directly. The local api uses the port 3000 in the localhost and the NMR values can be written as: `{"NMR1": 100.0, "NMR2": 50.0}`. In this case the command would be   
 
-`curl -X http://127.0.0.1:3000/classification -d '{"NMR1": 100.0, "NMR2": 50.0}'`
+`curl -X POST http://127.0.0.1:3000/classification -d '{"NMR1": 100.0, "NMR2": 50.0}'`
 
 then you should see the response:
 
