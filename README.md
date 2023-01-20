@@ -139,7 +139,7 @@ then you should see the response:
 `{"predicted_label": 0, "alkaloid_presence": false}`
 
 
-### 5.3 As a microservice with API Gateway
+### 5.4 As a microservice with API Gateway
 In order to deploy the image you can build the container image, create the ECR repository, push the image to the repository, and perform the deployment. First, build the cointainer with:
 
 `sam build --use-container`
