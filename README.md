@@ -137,3 +137,38 @@ and sent a request with your own NMR data directly. The local api uses the port 
 then you should see the response:
 
 `{"predicted_label": 0, "alkaloid_presence": false}`
+
+
+### 5.3 As a microservice with API Gateway
+In order to deploy the image you can build the container image, create the ECR repository, push the image to the repository, and perform the deployment. First, build the cointainer with:
+
+`sam build --use-container`
+
+Then, create the ECR repository named `alkaloid-repo`:
+aws ecr create-repository --repository-name alkaloid-repo
+The created repository contains an uri that can be retreieved with:
+
+`aws ecr describe-repositories --repository-name alkaloid-repo`
+
+Use the repository uri to login:
+
+`aws ecr get-login-password --region <your_region> | docker login -u AWS --password-stdin <repository_uri>`
+
+Tag and push:
+
+`docker tag alkaloidfunction:python3.7-v1 <repository_uri>`
+
+`docker push <repository_uri>`
+
+Now, you can deploy the image creating the CloudFormation stack named `alkaloidfunction`:
+
+`sam deploy --stack-name alkaloidfunction --region <your_region> --image-repository <repository_uri> --capabilities CAPABILITY_IAM`
+
+After that, test the created endpoint using curl or Postman:
+
+`curl -X POST -H "Content-Type: application/json" -d @../project/spectra.json <endpoint>`
+
+Finally, delete the created resources:
+
+`aws cloudformation delete-stack --stack-name alkaloidfunction`
+

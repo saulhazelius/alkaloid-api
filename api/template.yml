@@ -1,28 +1,30 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
 Description: >
-  predict-api
+  alkaloid-api
 
-  Sample SAM Template for predict-api
+  Sample SAM Template for alkaloid-api
 
 Globals:
   Function:
     Timeout: 10
 
 Resources:
-  InferenceApi:
+  AlkaloidApi:
     Type: AWS::Serverless::Api
     Properties:
      StageName: Prod
 
-  InferenceFunction:
+  AlkaloidFunction:
     Type: AWS::Serverless::Function 
     Properties:
+      FunctionName: Alkaloid
       PackageType: Image
       Events:
         Inference:
           Type: Api 
           Properties:
+            RestApiId: !Ref AlkaloidApi
             Path: /classification
             Method: post
     Metadata:
@@ -32,10 +34,9 @@ Resources:
 
 
 Outputs:
-  InferenceFunction:
+  AlkaloidFunction:
     Description: "Lambda Function ARN"
-    Value: !GetAtt InferenceFunction.Arn
-  InferenceFunctionIamRole:
+    Value: !GetAtt AlkaloidFunction.Arn
+  AlkaloidFunctionIamRole:
     Description: "Implicit IAM Role created for function"
-    Value: !GetAtt InferenceFunctionRole.Arn
-
+    Value: !GetAtt AlkaloidFunctionRole.Arn
