@@ -1,0 +1,7 @@
+#pyproject.toml
+[tool.pylint.format]
+max-line-length = "120"
+
+[tool.pylint.MASTER]
+jobs = 4
+fail-under = "2"
